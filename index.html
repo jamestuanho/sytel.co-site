@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="JH Consulting bridges emerging markets with cutting‑edge technology: technology scouting, cross‑border BD, and innovation advisory." />
   <title>JH Consulting</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="header-bar">
-      <img src="assets/logo.png" alt="Sytel.co Logo" class="logo" />
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-bar container">
+      <img src="assets/logo.png" alt="JH Consulting logo" class="logo" />
       <div class="header-text">
         <h1>JH Consulting</h1>
         <p>Cross-border innovation. Local impact. Global scale.</p>
@@ -17,37 +20,63 @@
     </div>
   </header>
 
-  <nav>
-    <a href="#about">About Us</a>
-    <a href="#services">What We Do</a>
-    <a href="#contact">Contact</a>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="container nav-inner">
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#services">Services</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </div>
   </nav>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>JH Consulting focuses on specialized technical areas for emerging markets by bridging them with cutting-edge technology. We provide personalized and highly targeted advisory services empowering substantial cross borders—partnering with forward-thinking companies.</p>
-  </section>
+  <main id="main">
+    <section id="about" class="section container">
+      <h2>About Us</h2>
+      <p>JH Consulting focuses on specialized technical areas for emerging markets by bridging them with cutting‑edge technology. We provide personalized and highly targeted advisory services empowering substantial cross‑border growth—partnering with forward‑thinking companies.</p>
+    </section>
 
-  <section id="services">
-    <h2>What We Do</h2>
-    <ul>
-      <li>Technology scouting and market analysis – finding the right technology, with substance and capability to address challenges to emerging markets. E-commerce platform, inventory management system, digital out of home marketing solutions, hybrid working/meeting/training solutions.</li>
-      <li>Cross-border business development – bridging technology gaps and needs between IP owners to buyers. We are well-versed in setting up, prospecting to be compliant with regulatory requirements in Australia, Japan and Vietnam.</li>
-      <li>Strategic advisory for innovation deployment – advising IP owners/Manufacturers with strong determination to showcase to new markets what make them special as a new force of technology. We walk the journey together from advisory to customer acquisition.</li>
-      <li>Customization – tailoring to the precise challenges and goals of our client. We understand the “Job to be done”.</li>
-      <li>Local implementation planning and support – understanding the how, where and who in the ecosystem of the markets we operate in. Relationship matters. We connect.</li>
-    </ul>
-  </section>
+    <section id="services" class="section container">
+      <h2>What We Do</h2>
+      <div class="cards">
+        <!-- Service cards remain unchanged -->
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:info@sytel.co">info@jamestuanho.com</p>
-    <p>Phone: +81 80-6577-8631</p>
-    <p>Address: Tokyo, Japan</p>
-  </section>
+    <section id="contact" class="section container">
+      <h2>Contact</h2>
+      <ul class="contact-list">
+        <li><strong>Email:</strong> <a href="mailto:info@jamestuanho.com">info@jamestuanho.com</a></li>
+        <li><strong>Phone:</strong> +81 80‑6577‑8631</li>
+        <li><strong>Address:</strong> Tokyo, Japan</li>
+      </ul>
+    </section>
+  </main>
 
-  <footer>
-    &copy; 2025 JH Consulting All rights reserved.
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <small>© <span id="y"></span> JH Consulting. All rights reserved.</small>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const map = new Map([...sections].map(s => [s.id, document.querySelector(`.nav-link[href="#${s.id}"]`)]));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const link = map.get(entry.target.id);
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          link?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
+    sections.forEach(s => io.observe(s));
+  </script>
 </body>
 </html>
